@@ -9,19 +9,21 @@ Check out this page for full instructions on getting started with Node-RED.
 ##Deploy Node-RED on Bluemix
 
 - You need a [Bluemix](https://console.ng.bluemix.net/) account. Log into the Bluemix.
-- Verify that your region setting is set to your local region. ![ScreenShot](images/pi_region_setting.png)
+- Verify that your region setting is set to US South. ![ScreenShot](images/pi_region_setting.png)
 - When you are logged in go to 'Catalog' and click on the 'Node-RED starter' application in Boilerplates. 
-- On the right side of the screen you must give it a name, which must be unique. Then click 'Create'. 
+- On the right side of the screen you must give it a unique name ( this name is your hostname and so needs to be unique across all of Bluemix. For example < YourName >nodered< pick3numbers > like salnodered123.) Then click 'Create'. 
 - Right now the Node-RED application is being created and deployed. This will take a few minutes.
-- Follow the instructions to install cloud foundry or cf
-- When finished click on the URL, which opens up your Node-RED application.
-
-Check out this [page]( http://nodered.org/docs/getting-started/) for full instructions on getting started with Node-RED.
+- OPTIONAL FOR DEVELOPERS - Follow the instructions to install cloud foundry or cf
 
 ##Personality Insights Lab
 
-- Go back to the Bluemix dashboard and click on the icon of the nodered application you just created.
-- Pick “Add a Service or API” and click the Personality Insights node under Watson section.  Make sure your Application is listed and click on Use.  Click on Restage.
+- Go back to the Bluemix dashboard by clicking DASHBOARD on top and click on the icon of the nodered application you just created.
+- Pick “Add a Service or API” and click the Personality Insights node under Watson section.  Make sure your Application is listed and click on Create.  Click on Restage.
+- After Restage is complete and the app has started click on the url under the name of APP on the top left side.
+- Once NodeRed opens click on 'Go to your Node-Red flow editor'
+
+> Check out this [page]( http://nodered.org/docs/getting-started/) for full instructions on getting started with Node-RED.
+
 - Drag an inject node to the palette.
 - Drag the personality insights node to the palette.
 - Drag a debug node to the palette.
@@ -35,21 +37,33 @@ Check out this [page]( http://nodered.org/docs/getting-started/) for full instru
 - Double-click the inject node and change Payload to string.  
 Go to [sample file](personal_insights_input_text.txt) and open the file and paste the text to the blank 
 field below the Payload field (this is the same text that is used in the demo).
+- Click Ok
 
 ![ScreenShot](images/pi_edit_inject_node.png)
+
+***
+Optional Steps if you want to see logs on the cloud 
+***
 
 - Open a command line on your laptop and login to Bluemix with your username/password. Making sure that you 
 are connecting to the appropriate datacenter for your application. 
 - For US South it will look like
 
 ![ScreenShot](images/pi_cf_us_login.png), 
+
 - for the UK 
 
 ![ScreenShot](images/pi_cf_uk_login.png)
+
 - and for Sydney 
 
 ![ScreenShot](images/pi_cf_sydney_login.png)
+
 - Type **cf logs app_name** where **app_name** is the name of your application.  
+
+***
+***
+
 - Return to the Node-RED palette.
 - Click the Deploy button
 - Click on the debug tab to the top right of the palette.

@@ -1,9 +1,16 @@
 # Installing Watson Developer Cloud Contribution Nodes 
 
+## Node-RED Bluemix Boilerplate
+The Watson nodes in the node-red-node-watson project in the watson-developer-cloud repo are the Watson nodes that are
+included with the Node-RED boilerplate on Bluemix.  
+
 ## Overview
-Additional Watson services nodes are available from the Watson Developer Cloud. If you wish to use these nodes
-you will need to modify Node-RED dependencies. These instructions show how to install these contribution nodes into 
-your Node-RED instance on Bluemix. 
+There will be times when we are working on updates that the project will
+contain updates that we haven't yet published to npm. If you wish to try out these updates before we publish, then 
+you will need to modify Node-RED dependencies. These instructions show how to install these pre-release changes into 
+your Node-RED instance on Bluemix. Alternatively you can deploy from 
+the [node red bluemix starter repository](https://github.com/watson-developer-cloud/node-red-bluemix-starter), which 
+brings in these nodes, along with box and dropbox nodes that the sample flows make use of to feed data into the Watson nodes. 
 
 ## Modify Node-RED Dependencies.
 On the Bluemix console, select your Node-RED application. At the top right you will see an "ADD GIT" button.
@@ -23,18 +30,22 @@ Select the file.
 
 ![Package json file before changes](images/contribution-package-json-file.before.png)
 
-Add a comma separator and a line pointing at the git home for the contribution nodes from Watson Developer Cloud
+Replace the line for node-red-node-watson with a line pointing at the git home for 
+the contribution nodes from Watson Developer Cloud. Add the npm modules for the dropbox and box nodes. 
 
 ![Package json file after changes](images/contribution-package-json-file.after.png)
 
 The change is 
 
 ```
-	"node-red-contrib-watson-developer-cloud-nodes" : "git://github.com/watson-developer-cloud/node-red-nodes.git"
+	 "node-red-node-watson":"https://github.com/watson-developer-cloud/node-red-node-watson.git",
+          
+	 "node-red-node-dropbox":"0.x",
+	 "node-red-node-box":"0.x"	 
+	 
 ```
 
-
-Save your changes
+Remember the comma separators at the end of each line except for the last. Save your changes
 
 ![Package json save changes](images/contribution-package-json-file-save.png)
 
@@ -46,7 +57,7 @@ Wait for Node-RED to restart
 
 ![Node RED application running](images/contribution-running.png)
 
-The contribution nodes will then be available for you to use on the palette.
+The updated nodes will then be available for you to use on the palette.
 
 
 

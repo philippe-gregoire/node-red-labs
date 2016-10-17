@@ -14,7 +14,7 @@ There are two ways of doing that depending if you use Node-RED in Bluemix or use
 
 ## On Bluemix
 
-If you are using Node-RED on Bluemix, go to your Node-RED app and click 'add a service or API' This will open a new window where you can select the Speech to Text service. Then you click on 'Use' a screen will show which asks for a restage, click on 'yes' and wait a minute. When the application is started click on the Url to go to your Node-RED application.
+If you are using Node-RED on Bluemix, go to your Node-RED app and click 'add a service or API' This will open a new window where you can select the Speech to Text service. Then you click on 'Create' a screen will show which asks for a restage, click on 'Restage' and wait a few minutes. When the application is started click on the Url to go to your Node-RED application.
 
 ### Uploading from a URL
 
@@ -82,8 +82,8 @@ You're now good to go: make sure to connect your node, deploy and click on the i
 
 The complete flow can be found here: [Text To Speech on Bluemix lab flow using the Dropbox node](s2t_bluemix_box_flow.json)
 
-
-## On a stand-alone system
+```
+## OPTIONAL On a stand-alone system
 
 You need to have a local instance of Node-RED with IBM nodes available. If you don't have that yet, you can go [here](/introduction_to_node_red/README.md).
 Then go to the Bluemix catalog and go to the Speech to Text service and click on it. Make sure that there is no app bound to this service and click 'Use"
@@ -146,6 +146,7 @@ First you need to add a 'MQTT In' node. This node must subscribe to the same top
 Then you can connect any node to this, like [Language Identification](/basic_examples/language_identification/README.md) to identify the language of the transcript. I this case I added a debug node, to see the output. The transcript is in the message.payload:
 
 ![`S2TDebugBL`](images/s2t_debugbl.jpg)
+```
 
 The extended flow can be found here: [Extended Text To Speech lab flow ](s2t_flow_extended.json)
 The flow in Node-Red in Bluemix can be found here: [Text To Speech lab flow for Bluemix](s2t_flow_bluemix.json)
