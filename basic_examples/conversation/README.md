@@ -41,35 +41,29 @@ Configure the Template node with the following code.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-	  My BOT
-	</title>
-	<link rel="stylesheet"
-        type="text/css"
+    <title>My BOT</title>
+	<link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   </head>
   <body>
 
     <div class="container">
-      <div id="no-script"class="bg-info">
+      <div id="no-script" class="bg-info">
         This application needs JavaScript enabled in your browser!
       </div>
       <div id="id_contextdump"></div>
 
       <h1>My BOT</h1>
-      <div id=id_botchathistory>
-	  </div>
-
-	  <div>
-	      <form>
+      <table id=id_botchathistory style="max-width:500px;margin:auto;cellspacing:3px;border: 3px solid orange">
+      </table>
+      <div>
             <label for="id_chattext">Your Input: </label>
             <input type="text" name="chattext" id="id_chattext">
             <br/><br/>
-	      </form>
-	      <button onclick="javascript:onChatClick()">Send</button>
+	      <button type=submit onclick="javascript:onChatClick()">Send</button>
 	  </div>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
@@ -77,6 +71,11 @@ Configure the Template node with the following code.
       $(document).ready(function() {
           javascriptCheck();
           	$('#id_contextdump').hide();
+          $("#id_chattext").keyup(function(event) {
+            if(event.keyCode == 13) {
+                onChatClick();
+            }
+          });
       });
 
       // if javascript is enabled on the browser then can
@@ -85,13 +84,13 @@ Configure the Template node with the following code.
         $('#no-script').remove();
       }
 
-      function createNewDiv(who, message) {
+      function createNewDiv(who, message,align,color) {
         var txt = who + ' : ' + message;
-        return $('<div></div>').text(txt);
+        return $('<tr><td style="padding: 5px;color: '+color+'"><b>'+who+'</b></td><td style="text-align:'+align+';color: '+color+'">'+message+'</td></tr></tr>');
       }
 
-      function chat(person, txt) {
-        $('#id_botchathistory').append(createNewDiv(person, txt));
+      function chat(person, txt,align,color) {
+        $('#id_botchathistory').append(createNewDiv(person, txt,align,color));
       }    
 
       function processOK(response) {
@@ -99,12 +98,12 @@ Configure the Template node with the following code.
         console.log(response.botresponse.messageout);
         console.log(response.botresponse.messageout.output.text);
         console.log(response.botresponse.messageout.context);
-        chat('Bot', response.botresponse.messageout.output.text);
+        chat('Bot', response.botresponse.messageout.output.text,'right','blue');
         $('#id_contextdump').data('convContext', response.botresponse.messageout.context);
       }
 
       function processNotOK() {
-        chat('Error', 'Error whilst attempting to talk to Bot');
+        chat('Error', 'Error whilst attempting to talk to Bot','center','red');
       }
 
       function invokeAjax(message) {
@@ -112,8 +111,6 @@ Configure the Template node with the following code.
         console.log('checking stashed context data');
         console.log(contextdata);
 
-
-        //var ajaxData = "msgdata=" + message;
         var ajaxData = {};
         ajaxData.msgdata = message;
         if (contextdata) {
@@ -132,10 +129,10 @@ Configure the Template node with the following code.
       // User has entered some text.
       function onChatClick() {
         var txt = $('#id_chattext').val();
-        chat('You', txt);
+        chat('Human', txt,'left','green');
         invokeAjax(txt);
+        $('#id_chattext').val("");
       }
-
     </script>
   </body>
 </html>
